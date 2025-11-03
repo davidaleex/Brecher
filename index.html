@@ -486,6 +486,82 @@
             line-height: 1.8;
         }
 
+        /* Contact Form */
+        .contact-form {
+            margin-top: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1.2rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            color: #ffffff;
+            font-size: 1.1rem;
+            font-family: 'Arial', sans-serif;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        #contactForm .cta-button {
+            width: 100%;
+            margin-top: 1rem;
+            cursor: pointer;
+            border: none;
+        }
+
+        #formResult {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        #formResult.show {
+            opacity: 1;
+        }
+
+        #formResult.success {
+            background: rgba(46, 213, 115, 0.2);
+            border: 2px solid rgba(46, 213, 115, 0.5);
+            color: #2ed573;
+        }
+
+        #formResult.error {
+            background: rgba(255, 71, 87, 0.2);
+            border: 2px solid rgba(255, 71, 87, 0.5);
+            color: #ff4757;
+        }
+
         /* Footer */
         footer {
             padding: 3rem 5%;
@@ -666,7 +742,32 @@
         <h2 class="section-title">Jetzt bist DU dran</h2>
         <div class="contact-content">
             <p>Du hast die Karte in der Hand - Du kennst jetzt deine Chance<br><br>Die Frage ist: Nutzt du sie, oder lässt du sie verfallen</p>
-            <a href="mailto:info@brecher-coaching.com" class="cta-button">Jetzt starten</a>
+
+            <!-- Contact Form -->
+            <form id="contactForm" class="contact-form">
+                <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+                <input type="hidden" name="subject" value="Neue BRECHER Anfrage">
+
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="Dein Name" required>
+                </div>
+
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Deine E-Mail" required>
+                </div>
+
+                <div class="form-group">
+                    <input type="tel" name="phone" placeholder="Deine Telefonnummer (optional)">
+                </div>
+
+                <div class="form-group">
+                    <textarea name="message" rows="5" placeholder="Deine Nachricht - Was möchtest du erreichen?" required></textarea>
+                </div>
+
+                <button type="submit" class="cta-button">Nachricht senden</button>
+
+                <div id="formResult"></div>
+            </form>
         </div>
     </section>
 
@@ -707,6 +808,54 @@
             el.style.transform = 'translateY(30px)';
             el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(el);
+        });
+
+        // Contact Form Handling
+        const contactForm = document.getElementById('contactForm');
+        const formResult = document.getElementById('formResult');
+
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const submitButton = contactForm.querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
+            submitButton.textContent = 'Wird gesendet...';
+            submitButton.disabled = true;
+
+            const formData = new FormData(contactForm);
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
+
+            try {
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: json
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    formResult.textContent = 'Nachricht erfolgreich gesendet! Wir melden uns bald bei dir';
+                    formResult.className = 'show success';
+                    contactForm.reset();
+                } else {
+                    throw new Error(result.message || 'Ein Fehler ist aufgetreten');
+                }
+            } catch (error) {
+                formResult.textContent = 'Fehler beim Senden - Bitte versuche es erneut oder kontaktiere uns direkt';
+                formResult.className = 'show error';
+            } finally {
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+
+                setTimeout(() => {
+                    formResult.classList.remove('show');
+                }, 5000);
+            }
         });
     </script>
 </body>
