@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BRECHERSYSTEM - Du wurdest ausgewählt</title>
+    <title>BRECHERSYSTEM - Wir leben Disziplin, jeden Tag</title>
     <style>
         * {
             margin: 0;
@@ -277,153 +277,31 @@
             margin: 0 auto;
             font-size: 1.3rem;
             line-height: 1.8;
+        }
+
+        .about-intro {
             text-align: center;
+            margin-bottom: 4rem;
+            font-size: 1.4rem;
+            line-height: 1.8;
         }
 
-        .about-content p {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-
-        .about-content p:nth-child(1) { animation-delay: 0.2s; }
-        .about-content p:nth-child(2) { animation-delay: 0.4s; }
-        .about-content p:nth-child(3) { animation-delay: 0.6s; }
-        .about-content p:nth-child(4) { animation-delay: 0.8s; }
-
-        /* Services Section */
-        .services {
-            padding: 8rem 5%;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 3rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        @media (max-width: 968px) {
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .service-card {
-            background: rgba(212, 175, 55, 0.05);
-            padding: 3rem 2rem;
-            border-radius: 25px;
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(212, 175, 55, 0.3);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, transparent 100%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .service-card:hover::before {
-            opacity: 1;
-        }
-
-        .service-card:hover {
-            transform: translateY(-15px) scale(1.02);
-            background: rgba(212, 175, 55, 0.1);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(212, 175, 55, 0.3);
-            border-color: rgba(212, 175, 55, 0.6);
-        }
-
-        .service-icon {
-            font-size: 4rem;
-            margin-bottom: 1.5rem;
-            display: inline-block;
-            transition: all 0.4s ease;
-            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5));
-        }
-
-        .service-card:hover .service-icon {
-            transform: scale(1.2) rotate(5deg);
-            filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.8));
-        }
-
-        .service-card h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-        }
-
-        .service-card p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            opacity: 0.9;
-        }
-
-        /* Transform Section */
-        .transform {
-            padding: 8rem 5%;
-            background: rgba(0, 0, 0, 0.3);
-            position: relative;
-        }
-
-        .transform::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: rotate 20s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: translate(-50%, -50%) rotate(0deg); }
-            to { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-
-        .transform-content {
-            max-width: 1000px;
-            margin: 0 auto;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .transform-list {
+        .coaching-details {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
             margin-top: 3rem;
-            max-width: 1000px;
-            margin-left: auto;
-            margin-right: auto;
         }
 
         @media (max-width: 768px) {
-            .transform-list {
+            .coaching-details {
                 grid-template-columns: 1fr;
             }
         }
 
-        .transform-item {
+        .coaching-item {
             background: rgba(212, 175, 55, 0.05);
-            padding: 2.5rem;
+            padding: 2rem;
             border-radius: 20px;
             border-left: 5px solid #d4af37;
             transition: all 0.3s ease;
@@ -431,7 +309,7 @@
             overflow: hidden;
         }
 
-        .transform-item::after {
+        .coaching-item::after {
             content: '';
             position: absolute;
             top: 0;
@@ -443,28 +321,35 @@
             transition: transform 0.4s ease;
         }
 
-        .transform-item:hover::after {
+        .coaching-item:hover::after {
             transform: translateX(0);
         }
 
-        .transform-item:hover {
+        .coaching-item:hover {
             transform: translateX(10px);
             background: rgba(212, 175, 55, 0.1);
             border-left-width: 8px;
             box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
         }
 
-        .transform-item h4 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            letter-spacing: 2px;
+        .coaching-item h4 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
             position: relative;
             z-index: 1;
         }
 
-        .transform-item p {
+        .coaching-item p {
             position: relative;
             z-index: 1;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .cta-section {
+            text-align: center;
+            margin-top: 4rem;
         }
 
         /* Contact Section */
@@ -495,6 +380,16 @@
         .contact p {
             font-size: 1.5rem;
             margin-bottom: 3rem;
+            line-height: 1.8;
+        }
+
+        .pricing-info {
+            background: rgba(212, 175, 55, 0.05);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            margin-top: 3rem;
+            font-size: 1.2rem;
             line-height: 1.8;
         }
 
@@ -614,7 +509,7 @@
                 padding: 6rem 5% 3rem;
             }
 
-            .about, .services, .transform, .contact {
+            .about, .contact {
                 padding: 4rem 5% !important;
             }
 
@@ -623,32 +518,20 @@
                 padding: 1rem 2rem;
             }
 
-            .service-card {
-                padding: 2rem 1.5rem;
+            .about-intro {
+                font-size: 1.1rem;
             }
 
-            .service-card h3 {
-                font-size: 1.4rem;
-            }
-
-            .service-card p {
-                font-size: 1rem;
-            }
-
-            .service-icon {
-                font-size: 3rem;
-            }
-
-            .transform-item {
+            .coaching-item {
                 padding: 1.5rem;
             }
 
-            .transform-item h4 {
+            .coaching-item h4 {
                 font-size: 1.2rem;
             }
 
-            .transform-item p {
-                font-size: 0.95rem;
+            .coaching-item p {
+                font-size: 1rem;
             }
 
             .contact-form input,
@@ -676,10 +559,6 @@
                 font-size: 1rem;
             }
 
-            .subtitle strong {
-                font-size: 1.3rem !important;
-            }
-
             .section-title {
                 font-size: 1.5rem;
             }
@@ -697,25 +576,13 @@
                 padding: 5rem 3% 2rem;
             }
 
-            .about, .services, .transform, .contact {
+            .about, .contact {
                 padding: 3rem 3% !important;
             }
 
             .cta-button {
                 font-size: 0.9rem;
                 padding: 0.9rem 1.5rem;
-            }
-
-            .service-card h3 {
-                font-size: 1.2rem;
-            }
-
-            .service-card p {
-                font-size: 0.9rem;
-            }
-
-            .service-icon {
-                font-size: 2.5rem;
             }
         }
 
@@ -795,184 +662,57 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Du wurdest ausgewählt</h1>
-            <p class="subtitle">Nur wenige bekommen diese Karte<br>
-            Sie ist deine Einladung zu etwas Grösserem<br><br>
-            <strong style="font-size: 2rem;">Bist du bereit, aussergewöhnlich zu werden?</strong></p>
-            <a href="#about" class="cta-button">Ich bin bereit</a>
+            <h1>Wir leben Disziplin, jeden Tag.</h1>
+            <p class="subtitle">Kein Motivationstraining. Kein Gelaber. Nur Systeme, die funktionieren.</p>
+            <a href="#contact" class="cta-button">Jetzt bewerben</a>
         </div>
         <div class="scroll-indicator"></div>
     </section>
 
-    <!-- About Section -->
+    <!-- About / Philosophie Section -->
     <section class="about" id="about">
-        <h2 class="section-title">Warum DU?</h2>
+        <h2 class="section-title">Das System</h2>
         <div class="about-content">
-            <p>Weil wir in dir ungenutztes Potenzial sehen</p>
-            <p style="margin-top: 2rem;">Diese Karte ist keine Kritik - Sie ist eine Chance<br>Eine Einladung zu einer Tür, die bisher verschlossen war</p>
-            <p style="margin-top: 2rem; font-weight: 700; font-size: 1.5rem;">Wir sehen, wo du stehen könntest<br>Und wir wissen genau, wie du dorthin kommst</p>
-            <div style="margin-top: 3rem; text-align: center;">
-                <a href="#problem" class="cta-button" style="display: inline-block;">Weiter</a>
+            <div class="about-intro">
+                <p>Wir sind David und Cedric. Zwei Studenten, die beschlossen haben, ihr Leben radikal zu strukturieren.</p>
+                <p style="margin-top: 1.5rem;">Kein Motivationstraining, keine Phrasen – nur Systeme, die funktionieren.</p>
             </div>
-        </div>
-    </section>
 
-    <!-- Problem Section -->
-    <section class="services" id="problem" style="background: rgba(212, 175, 55, 0.03); padding: 8rem 5%;">
-        <div style="max-width: 1100px; margin: 0 auto; text-align: center;">
-            <h2 class="section-title" style="margin-bottom: 3rem;">Du bist hier, weil du mehr willst</h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 2rem;">
-                <div style="padding: 1.5rem; background: rgba(0, 0, 0, 0.3); border-radius: 15px; border-left: 4px solid #d4af37;">
-                    <p style="font-size: 1.1rem; opacity: 0.9;">❌ Dir fehlt die Struktur und der Plan</p>
+            <div class="coaching-details">
+                <div class="coaching-item">
+                    <h4>2× 45 Minuten Coaching</h4>
+                    <p>Pro Monat. Direkt. Kein Platz für Ausreden.</p>
                 </div>
-                <div style="padding: 1.5rem; background: rgba(0, 0, 0, 0.3); border-radius: 15px; border-left: 4px solid #d4af37;">
-                    <p style="font-size: 1.1rem; opacity: 0.9;">❌ Du weisst nicht, wo du anfangen sollst</p>
+                <div class="coaching-item">
+                    <h4>Individuelle Konzeptarbeit</h4>
+                    <p>Dein Leben, dein Plan. Massgeschneidert auf dich.</p>
                 </div>
-                <div style="padding: 1.5rem; background: rgba(0, 0, 0, 0.3); border-radius: 15px; border-left: 4px solid #d4af37;">
-                    <p style="font-size: 1.1rem; opacity: 0.9;">❌ Dir fehlt jemand, der dich pusht</p>
+                <div class="coaching-item">
+                    <h4>Persönlicher Scoreboard-Plan</h4>
+                    <p>Energie, Kontrolle, Respekt. Messbar und klar.</p>
                 </div>
-                <div style="padding: 1.5rem; background: rgba(0, 0, 0, 0.3); border-radius: 15px; border-left: 4px solid #d4af37;">
-                    <p style="font-size: 1.1rem; opacity: 0.9;">❌ Du willst Ergebnisse, keine leeren Versprechen</p>
-                </div>
-                <div style="padding: 1.5rem; background: rgba(0, 0, 0, 0.3); border-radius: 15px; border-left: 4px solid #d4af37;">
-                    <p style="font-size: 1.1rem; opacity: 0.9;">❌ Du startest immer wieder, aber hältst nicht durch</p>
-                </div>
-                <div style="padding: 1.5rem; background: rgba(0, 0, 0, 0.3); border-radius: 15px; border-left: 4px solid #d4af37;">
-                    <p style="font-size: 1.1rem; opacity: 0.9;">❌ Du weisst, dass mehr in dir steckt</p>
+                <div class="coaching-item">
+                    <h4>Kein Platz für Ausreden</h4>
+                    <p>Wir arbeiten nur mit Menschen, die bereit sind.</p>
                 </div>
             </div>
-            <div style="margin-top: 3rem;">
-                <a href="#services" class="cta-button" style="display: inline-block;">Die Lösung entdecken</a>
-            </div>
-        </div>
-    </section>
 
-    <!-- Services Section -->
-    <section class="services" id="services">
-        <h2 class="section-title">Die 4 Säulen deiner Transformation</h2>
-        <div class="services-grid">
-            <div class="service-card">
-                <div class="service-icon">🧠</div>
-                <h3>Mindset</h3>
-                <p>Breche limitierende Glaubenssätze und entwickle eine Winner-Mentalität - Deine Gedanken erschaffen deine Realität</p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">💪</div>
-                <h3>Physique</h3>
-                <p>Bringe deinen Körper auf Elite-Level durch intelligentes Training und Ernährung - Fühle dich stark, energiegeladen und selbstbewusst</p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">💼</div>
-                <h3>Business Mindset</h3>
-                <p>Entwickle das Denken erfolgreicher Menschen - Finanzielle Intelligenz, strategisches Denken, Selbstwert - Wenn dein Mindset sich verändert, folgt der Rest automatisch</p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">⚡</div>
-                <h3>Habits</h3>
-                <p>Implementiere Erfolgsroutinen, die bleiben - Morgenroutinen, Produktivität, Disziplin - Die Gewohnheiten der Top 1%</p>
-            </div>
-        </div>
-        <div style="text-align: center; margin-top: 4rem;">
-            <a href="#transform" class="cta-button">Wie funktioniert's?</a>
-        </div>
-    </section>
-
-    <!-- Transform Section -->
-    <section class="transform" id="transform">
-        <h2 class="section-title">Wie läuft die Transformation ab?</h2>
-        <div class="transform-content">
-            <div class="transform-list">
-                <div class="transform-item">
-                    <h4>1. ANALYSE</h4>
-                    <p>Wir schauen uns genau an, wo du stehst und wo du hin willst - Ehrlich, ohne Bullshit - Wir identifizieren, was dich wirklich zurückhält</p>
-                </div>
-                <div class="transform-item">
-                    <h4>2. INDIVIDUELLER PLAN</h4>
-                    <p>Dein persönlicher Fahrplan für alle 4 Säulen - Keine Standard-Programme - Alles auf dich zugeschnitten</p>
-                </div>
-                <div class="transform-item">
-                    <h4>3. UMSETZUNG</h4>
-                    <p>Wir setzen gemeinsam um - Du ziehst durch, wir pushen dich - Regelmässige Check-ins und Anpassungen</p>
-                </div>
-                <div class="transform-item">
-                    <h4>4. TRANSFORMATION</h4>
-                    <p>Die Veränderung passiert - Dein Körper, dein Mindset, deine Gewohnheiten - Du wirst zu der Person, die du sein willst</p>
-                </div>
-            </div>
-            <div style="text-align: center; margin-top: 4rem;">
-                <a href="#testimonials" class="cta-button">Erfolgsgeschichten ansehen</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Social Proof Section -->
-    <section class="about" id="testimonials">
-        <h2 class="section-title">Erfolgsgeschichten</h2>
-        <div style="max-width: 1000px; margin: 0 auto;">
-            <div style="display: grid; gap: 2rem; margin-top: 2rem;">
-                <div style="background: rgba(212, 175, 55, 0.05); padding: 2rem; border-radius: 20px; border-left: 5px solid #d4af37;">
-                    <p style="font-size: 1.2rem; font-style: italic; margin-bottom: 1rem;">"Brechersystem hat mein Leben komplett verändert - Ich habe nicht nur 12kg abgenommen, sondern auch die mentale Klarheit gefunden, grosse Schritte in meinem Leben zu gehen - Ich fühle mich zum ersten Mal wirklich lebendig"</p>
-                    <p style="font-weight: 700; color: #d4af37;">— Sarah, 32</p>
-                </div>
-                <div style="background: rgba(212, 175, 55, 0.05); padding: 2rem; border-radius: 20px; border-left: 5px solid #d4af37;">
-                    <p style="font-size: 1.2rem; font-style: italic; margin-bottom: 1rem;">"Das Programm war intensiv, aber es hat sich gelohnt - Ich bin selbstbewusster, fitter und habe endlich die Klarheit, was ich im Leben will"</p>
-                    <p style="font-weight: 700; color: #d4af37;">— Laura, 28</p>
-                </div>
-                <div style="background: rgba(212, 175, 55, 0.05); padding: 2rem; border-radius: 20px; border-left: 5px solid #d4af37;">
-                    <p style="font-size: 1.2rem; font-style: italic; margin-bottom: 1rem;">"Ich dachte, ich brauche kein Coaching - Aber Brechersystem hat mir gezeigt, was alles möglich ist - Beste Investition in mich selbst"</p>
-                    <p style="font-weight: 700; color: #d4af37;">— Mike, 35</p>
-                </div>
-            </div>
-            <div style="text-align: center; margin-top: 3rem;">
-                <p style="font-size: 1.3rem; font-weight: 700;">Über 100+ Menschen haben bereits ihre Transformation gestartet</p>
-            </div>
-            <div style="text-align: center; margin-top: 3rem;">
-                <a href="#faq" class="cta-button">Häufige Fragen</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="services" id="faq">
-        <h2 class="section-title">Häufige Fragen</h2>
-        <div style="max-width: 900px; margin: 0 auto;">
-            <div style="display: grid; gap: 2rem;">
-                <div style="background: rgba(212, 175, 55, 0.05); padding: 2rem; border-radius: 20px; border: 2px solid rgba(212, 175, 55, 0.3);">
-                    <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #d4af37;">Wie viel Zeit muss ich investieren?</h3>
-                    <p style="font-size: 1.1rem; line-height: 1.6;">Du solltest mit 5-8 Stunden pro Woche rechnen - Training, Coaching-Calls, Umsetzung - Aber ehrlich: Wenn dir deine Transformation nicht 1 Stunde am Tag wert ist, ist Brechersystem nichts für dich</p>
-                </div>
-                <div style="background: rgba(212, 175, 55, 0.05); padding: 2rem; border-radius: 20px; border: 2px solid rgba(212, 175, 55, 0.3);">
-                    <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #d4af37;">Was kostet das Programm?</h3>
-                    <p style="font-size: 1.1rem; line-height: 1.6;">Das erfährst du im kostenlosen Erstgespräch - Wir wollen erst sicherstellen, dass wir zusammenpassen - Brechersystem ist eine Investition in dich selbst, kein Produkt von der Stange</p>
-                </div>
-                <div style="background: rgba(212, 175, 55, 0.05); padding: 2rem; border-radius: 20px; border: 2px solid rgba(212, 175, 55, 0.3);">
-                    <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #d4af37;">Für wen ist Brechersystem NICHT geeignet?</h3>
-                    <p style="font-size: 1.1rem; line-height: 1.6;">Wenn du eine Wunderpille suchst, schnelle Ergebnisse ohne Arbeit willst, oder nicht bereit bist, deine Komfortzone zu verlassen - Dann ist Brechersystem nichts für dich - Wir arbeiten nur mit Menschen, die wirklich bereit sind, alles zu geben</p>
-                </div>
-                <div style="background: rgba(212, 175, 55, 0.05); padding: 2rem; border-radius: 20px; border: 2px solid rgba(212, 175, 55, 0.3);">
-                    <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #d4af37;">Gibt es eine Geld-zurück-Garantie?</h3>
-                    <p style="font-size: 1.1rem; line-height: 1.6;">Nein - Wir glauben an Commitment - Wenn du von Anfang an einen Ausweg suchst, wird es nicht funktionieren - Aber: Wir garantieren dir, dass du die Tools und das System bekommst, die nachweislich funktionieren - Der Rest liegt an dir</p>
-                </div>
-            </div>
-            <div style="text-align: center; margin-top: 4rem;">
-                <a href="#contact" class="cta-button">Jetzt Erstgespräch sichern</a>
+            <div class="cta-section">
+                <a href="#contact" class="cta-button">Kostenloses Erstgespräch sichern</a>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
     <section class="contact" id="contact">
-        <h2 class="section-title">Bist du bereit?</h2>
+        <h2 class="section-title">Bewerbung</h2>
         <div class="contact-content">
-            <p>Du hast die Karte bekommen - Das war kein Zufall<br><br>
-            Die Frage ist nicht OB du dich verändern willst<br>
-            Die Frage ist: WANN fängst du an?<br><br>
-            <strong style="font-size: 1.3rem; color: #d4af37;">Fülle das Formular aus und sichere dir dein kostenloses Erstgespräch</strong></p>
+            <p>Bewirb dich für das Brechersystem. Wir nehmen nur 5 Klienten gleichzeitig an. Sag uns, warum du dabei sein willst.</p>
 
             <!-- Contact Form -->
             <form id="contactForm" class="contact-form">
                 <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
-                <input type="hidden" name="subject" value="Neue Brechersystem Anfrage">
+                <input type="hidden" name="subject" value="Neue Brechersystem Bewerbung">
 
                 <div class="form-group">
                     <input type="text" name="name" placeholder="Dein Name" required>
@@ -987,19 +727,25 @@
                 </div>
 
                 <div class="form-group">
-                    <textarea name="message" rows="5" placeholder="Deine Nachricht - Was möchtest du erreichen?" required></textarea>
+                    <textarea name="message" rows="5" placeholder="Warum willst du dabei sein?" required></textarea>
                 </div>
 
-                <button type="submit" class="cta-button">Nachricht senden</button>
+                <button type="submit" class="cta-button">Bewerbung absenden</button>
 
                 <div id="formResult"></div>
             </form>
+
+            <!-- Pricing Info -->
+            <div class="pricing-info">
+                <p>Das 1:1 Mentoring startet bei <strong>690 CHF pro Monat</strong> (2 Gespräche + Konzeptarbeit).</p>
+                <p style="margin-top: 1rem;">Im Erstgespräch klären wir, ob du reinpasst.</p>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2025 Brechersystem Coaching - Alle Rechte vorbehalten</p>
+        <p>&copy; 2025 Brechersystem - Alle Rechte vorbehalten</p>
     </footer>
 
     <script>
@@ -1028,8 +774,8 @@
             });
         }, observerOptions);
 
-        // Observe all service cards and transform items
-        document.querySelectorAll('.service-card, .transform-item').forEach(el => {
+        // Observe all coaching items
+        document.querySelectorAll('.coaching-item').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(30px)';
             el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
@@ -1065,7 +811,7 @@
                 const result = await response.json();
 
                 if (response.ok) {
-                    formResult.textContent = 'Nachricht erfolgreich gesendet! Wir melden uns bald bei dir';
+                    formResult.textContent = 'Bewerbung erfolgreich gesendet! Wir melden uns bald bei dir.';
                     formResult.className = 'show success';
                     contactForm.reset();
                 } else {
