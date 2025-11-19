@@ -49,7 +49,7 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                         "subject": "Brechersystem - E-Mail Bestätigung"
                     }],
                     "from": {
-                        "email": "david.weil@basel-land.ch",
+                        "email": "noreply@brechersystem.ch",
                         "name": "Brechersystem"
                     },
                     "content": [{
