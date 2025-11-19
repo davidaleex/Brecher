@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <style>
         :root {
             --bg: #000000;
@@ -1523,32 +1524,38 @@
             return Math.floor(100000 + Math.random() * 900000).toString();
         }
 
-        // Send verification email
+        // Send verification email via backend API
         async function sendVerificationEmail(email, code) {
             const data = {
-                access_key: '3b390291-efa0-4a79-afef-421ac9e8295a',
-                subject: 'Brechersystem - E-Mail Bestätigung',
-                from_name: 'Brechersystem',
-                email: email,
-                message: `Dein Bestätigungscode lautet: ${code}\n\nGib diesen Code auf der Website ein, um deine Bewerbung abzuschließen.\n\nDer Code ist 10 Minuten gültig.`
+                to: email,
+                code: code,
+                name: storedFormData.get('name')
             };
 
-            const response = await fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify(data)
-            });
+            try {
+                const response = await fetch('/api/send-verification', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
 
-            if (!response.ok) {
-                const errorData = await response.json();
-                console.error('Web3Forms Error:', errorData);
-                throw new Error('Email konnte nicht gesendet werden');
+                if (!response.ok) {
+                    throw new Error('Email konnte nicht gesendet werden');
+                }
+
+                const result = await response.json();
+                if (!result.success) {
+                    throw new Error('Email konnte nicht gesendet werden');
+                }
+
+                return result;
+            } catch (error) {
+                console.error('Email Error:', error);
+                throw error;
             }
-
-            return await response.json();
         }
 
         // Start resend countdown
