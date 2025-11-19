@@ -9,6 +9,9 @@ import urllib.parse
 PORT = int(os.environ.get('PORT', 8080))
 DIRECTORY = "."
 
+# SendGrid API Key (must be set as environment variable)
+SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY', '')
+
 class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=DIRECTORY, **kwargs)
@@ -32,13 +35,19 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             data = json.loads(post_data.decode('utf-8'))
 
             try:
-                # Send email via Web3Forms
+                # Send email via SendGrid
                 email_data = {
-                    'access_key': '3b390291-efa0-4a79-afef-421ac9e8295a',
-                    'from_name': 'Brechersystem',
-                    'subject': 'Brechersystem - E-Mail Bestätigung',
-                    'email': data['to'],
-                    'message': f"""Hallo {data['name']},
+                    "personalizations": [{
+                        "to": [{"email": data['to']}],
+                        "subject": "Brechersystem - E-Mail Bestätigung"
+                    }],
+                    "from": {
+                        "email": "noreply@brechersystem.ch",
+                        "name": "Brechersystem"
+                    },
+                    "content": [{
+                        "type": "text/plain",
+                        "value": f"""Hallo {data['name']},
 
 Dein Bestätigungscode lautet:
 
@@ -50,16 +59,20 @@ Der Code ist 10 Minuten gültig.
 
 Viele Grüße
 Das Brechersystem Team"""
+                    }]
                 }
 
                 req = urllib.request.Request(
-                    'https://api.web3forms.com/submit',
+                    'https://api.sendgrid.com/v3/mail/send',
                     data=json.dumps(email_data).encode('utf-8'),
-                    headers={'Content-Type': 'application/json'}
+                    headers={
+                        'Authorization': f'Bearer {SENDGRID_API_KEY}',
+                        'Content-Type': 'application/json'
+                    }
                 )
 
                 with urllib.request.urlopen(req) as response:
-                    result = json.loads(response.read().decode('utf-8'))
+                    print(f"✅ Verification email sent to {data['to']}")
 
                 self.send_response(200)
                 self.send_header('Content-type', 'application/json')
@@ -67,7 +80,7 @@ Das Brechersystem Team"""
                 self.wfile.write(json.dumps({'success': True}).encode('utf-8'))
 
             except Exception as e:
-                print(f"Error sending email: {e}")
+                print(f"❌ Error sending email: {e}")
                 self.send_response(500)
                 self.send_header('Content-type', 'application/json')
                 self.end_headers()
