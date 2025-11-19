@@ -30,11 +30,18 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
     def do_POST(self):
         # Handle verification email endpoint
         if self.path == '/api/send-verification':
-            content_length = int(self.headers['Content-Length'])
-            post_data = self.rfile.read(content_length)
-            data = json.loads(post_data.decode('utf-8'))
-
             try:
+                content_length = int(self.headers['Content-Length'])
+                post_data = self.rfile.read(content_length)
+                data = json.loads(post_data.decode('utf-8'))
+
+                print(f"📧 Attempting to send verification email to {data['to']}")
+                print(f"🔑 API Key present: {bool(SENDGRID_API_KEY)}")
+                print(f"🔑 API Key length: {len(SENDGRID_API_KEY) if SENDGRID_API_KEY else 0}")
+
+                if not SENDGRID_API_KEY:
+                    raise Exception("SENDGRID_API_KEY environment variable not set!")
+
                 # Send email via SendGrid
                 email_data = {
                     "personalizations": [{
@@ -71,8 +78,15 @@ Das Brechersystem Team"""
                     }
                 )
 
-                with urllib.request.urlopen(req) as response:
-                    print(f"✅ Verification email sent to {data['to']}")
+                try:
+                    with urllib.request.urlopen(req) as response:
+                        response_body = response.read().decode('utf-8')
+                        print(f"✅ Verification email sent to {data['to']}")
+                        print(f"📨 SendGrid response: {response.status}")
+                except urllib.error.HTTPError as e:
+                    error_body = e.read().decode('utf-8')
+                    print(f"❌ SendGrid HTTP Error {e.code}: {error_body}")
+                    raise Exception(f"SendGrid error: {e.code} - {error_body}")
 
                 self.send_response(200)
                 self.send_header('Content-type', 'application/json')
@@ -80,7 +94,11 @@ Das Brechersystem Team"""
                 self.wfile.write(json.dumps({'success': True}).encode('utf-8'))
 
             except Exception as e:
+                import traceback
                 print(f"❌ Error sending email: {e}")
+                print(f"🔍 Full traceback:")
+                traceback.print_exc()
+
                 self.send_response(500)
                 self.send_header('Content-type', 'application/json')
                 self.end_headers()
